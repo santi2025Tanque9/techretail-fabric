@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "PL_Orquestador_TechRetail"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1200b156-1ad2-8d19-4260-0f27e5228496"
+  }
+}

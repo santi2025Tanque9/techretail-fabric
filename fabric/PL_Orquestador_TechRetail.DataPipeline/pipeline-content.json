@@ -1,0 +1,158 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {
+            "archivos": [
+              {
+                "archivo": "tiendas.csv",
+                "delimitador": "|",
+                "tabla": "tiendas"
+              },
+              {
+                "archivo": "productos.csv",
+                "delimitador": "|",
+                "tabla": "productos"
+              },
+              {
+                "archivo": "empleados.csv",
+                "delimitador": "|",
+                "tabla": "empleados"
+              },
+              {
+                "archivo": "clientes.csv",
+                "delimitador": "|",
+                "tabla": "clientes"
+              },
+              {
+                "archivo": "presupuesto_metas.csv",
+                "delimitador": "|",
+                "tabla": "presupuesto_metas"
+              },
+              {
+                "archivo": "ventas_transacciones.csv",
+                "delimitador": "|",
+                "tabla": "ventas_transacciones"
+              },
+              {
+                "archivo": "inventario_snapshot.csv",
+                "delimitador": "|",
+                "tabla": "inventario_snapshot"
+              }
+            ]
+          },
+          "waitOnCompletion": true,
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "pipelineId": "00311be4-8bad-a8ca-4877-68b59fa9073c",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "55b5e612-6d7f-47d9-8a7b-83c3d6c590cb"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Ingesta_Bronze",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a7842cc4-0d3a-80d9-4ecf-c0f942076348",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver_Dimensiones",
+        "dependsOn": [
+          {
+            "activity": "Ingesta_Bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "fabf9bb1-36cf-858a-4316-6a4552cdfa3e",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver_Hechos",
+        "dependsOn": [
+          {
+            "activity": "Silver_Dimensiones",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "c8e92d98-47e9-8388-4c6d-11602a933625",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Gold_Dimensiones",
+        "dependsOn": [
+          {
+            "activity": "Silver_Hechos",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "e3a60733-592f-be62-43f1-25e25a2bf0b0",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Gold_Hechos",
+        "dependsOn": [
+          {
+            "activity": "Gold_Dimensiones",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

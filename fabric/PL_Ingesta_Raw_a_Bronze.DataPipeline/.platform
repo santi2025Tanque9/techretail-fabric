@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "PL_Ingesta_Raw_a_Bronze"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "00311be4-8bad-a8ca-4877-68b59fa9073c"
+  }
+}

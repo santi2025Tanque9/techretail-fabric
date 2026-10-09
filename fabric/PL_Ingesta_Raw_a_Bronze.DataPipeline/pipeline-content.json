@@ -1,0 +1,174 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.archivos",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "DelimitedTextSource",
+                  "formatSettings": {
+                    "type": "DelimitedTextReadSettings"
+                  },
+                  "additionalColumns": [
+                    {
+                      "name": "_archivo_origen",
+                      "value": "$$FILEPATH"
+                    },
+                    {
+                      "name": "_fecha_ingesta",
+                      "value": {
+                        "value": "@utcNow()",
+                        "type": "Expression"
+                      }
+                    }
+                  ],
+                  "storeSettings": {
+                    "type": "LakehouseReadSettings",
+                    "recursive": true,
+                    "enablePartitionDiscovery": false
+                  },
+                  "datasetSettings": {
+                    "type": "DelimitedText",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": "raw",
+                        "fileName": {
+                          "value": "@item().archivo",
+                          "type": "Expression"
+                        }
+                      },
+                      "columnDelimiter": {
+                        "value": "@item().delimitador",
+                        "type": "Expression"
+                      },
+                      "quoteChar": "\"",
+                      "escapeChar": "\\",
+                      "firstRowAsHeader": true,
+                      "multiline": false
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "LakehouseBronze",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "56cd5073-a6e5-8f63-42c8-d84510ef4bc0",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "LakehouseTableSink",
+                  "tableActionOption": "OverwriteSchema",
+                  "applyVOrder": true,
+                  "enableTimestampNtz": false,
+                  "partitionOption": "None",
+                  "datasetSettings": {
+                    "type": "LakehouseTable",
+                    "typeProperties": {
+                      "schema": "bronze",
+                      "table": {
+                        "value": "@item().tabla",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "LakehouseBronze",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "56cd5073-a6e5-8f63-42c8-d84510ef4bc0",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Tables"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Copy_Raw_a_Bronze",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "ForEach_Archivos",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "archivos": {
+        "type": "array",
+        "defaultValue": [
+          {
+            "archivo": "tiendas.csv",
+            "delimitador": "|",
+            "tabla": "tiendas"
+          },
+          {
+            "archivo": "productos.csv",
+            "delimitador": "|",
+            "tabla": "productos"
+          },
+          {
+            "archivo": "empleados.csv",
+            "delimitador": "|",
+            "tabla": "empleados"
+          },
+          {
+            "archivo": "clientes.csv",
+            "delimitador": "|",
+            "tabla": "clientes"
+          },
+          {
+            "archivo": "presupuesto_metas.csv",
+            "delimitador": "|",
+            "tabla": "presupuesto_metas"
+          },
+          {
+            "archivo": "ventas_transacciones.csv",
+            "delimitador": "|",
+            "tabla": "ventas_transacciones"
+          },
+          {
+            "archivo": "inventario_snapshot.csv",
+            "delimitador": "|",
+            "tabla": "inventario_snapshot"
+          }
+        ]
+      }
+    }
+  }
+}
