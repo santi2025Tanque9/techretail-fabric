@@ -1,0 +1,67 @@
+table FactInventario
+	lineageTag: 4b74fe67-c121-4a75-bae0-d7ce741f78d1
+	sourceLineageTag: [gold].[FactInventario]
+
+	column tienda_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c3efef3a-e42e-4c9a-8338-f87fabb637b6
+		sourceLineageTag: tienda_key
+		summarizeBy: none
+		sourceColumn: tienda_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 657116d9-7b5a-4a02-9ca1-4fc9759b251e
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 0db320f1-816b-4c4e-b81a-50e400e844e4
+		sourceLineageTag: categoria
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad_disponible
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7d0cfb80-5171-4010-99a1-2b416d2a277e
+		sourceLineageTag: cantidad_disponible
+		summarizeBy: sum
+		sourceColumn: cantidad_disponible
+
+		annotation SummarizationSetBy = Automatic
+
+	column sin_stock
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 4cdccaad-151b-4745-aef3-6fa37c513dd2
+		sourceLineageTag: sin_stock
+		summarizeBy: none
+		sourceColumn: sin_stock
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactInventario = entity
+		mode: directLake
+		source
+			entityName: FactInventario
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

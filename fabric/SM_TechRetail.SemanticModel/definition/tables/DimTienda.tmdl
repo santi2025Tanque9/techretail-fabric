@@ -1,0 +1,106 @@
+table DimTienda
+	lineageTag: 1d2906f2-a48a-4bc6-a300-06af803bf7b1
+	sourceLineageTag: [gold].[DimTienda]
+
+	column tienda_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c4860746-731c-468a-a6d6-b7c28ab359e1
+		sourceLineageTag: tienda_key
+		summarizeBy: none
+		sourceColumn: tienda_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tienda_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0677dc1d-dd55-4ef3-847a-17c94d983ea7
+		sourceLineageTag: tienda_id
+		summarizeBy: none
+		sourceColumn: tienda_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_tienda
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 65056996-5c51-45c2-843f-a12d15f5a050
+		sourceLineageTag: nombre_tienda
+		summarizeBy: none
+		sourceColumn: nombre_tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_tienda_display
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: d4d3b947-5dc9-4aee-a8af-f9004cc60aae
+		sourceLineageTag: nombre_tienda_display
+		summarizeBy: none
+		sourceColumn: nombre_tienda_display
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 483e59ca-e02e-4dca-b9bb-8d2206f09e95
+		sourceLineageTag: ciudad
+		summarizeBy: none
+		sourceColumn: ciudad
+
+		annotation SummarizationSetBy = Automatic
+
+	column pais
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 23ccc6da-745d-4dcb-b857-dffa8a0d40d0
+		sourceLineageTag: pais
+		summarizeBy: none
+		sourceColumn: pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: ed6fde75-055d-4a37-8243-50190bd8c70e
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column formato_tienda
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 6f8ef356-ec93-407d-a841-41c94acedc74
+		sourceLineageTag: formato_tienda
+		summarizeBy: none
+		sourceColumn: formato_tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_apertura
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 5a44b840-3173-46f0-868e-1043678ecad7
+		sourceLineageTag: fecha_apertura
+		summarizeBy: none
+		sourceColumn: fecha_apertura
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimTienda = entity
+		mode: directLake
+		source
+			entityName: DimTienda
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

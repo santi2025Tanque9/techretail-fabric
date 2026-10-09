@@ -1,0 +1,112 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "60d826e2c0c2abdcf5ab",
+  "position": {
+    "x": 839.70515970515964,
+    "y": 347.51842751842747,
+    "z": 1,
+    "height": 207,
+    "width": 684,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimEmpleado"
+                    }
+                  },
+                  "Property": "nombre_completo"
+                }
+              },
+              "queryRef": "DimEmpleado.nombre_completo",
+              "nativeQueryRef": "nombre_completo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimEmpleado"
+                    }
+                  },
+                  "Property": "puesto"
+                }
+              },
+              "queryRef": "DimEmpleado.puesto",
+              "nativeQueryRef": "puesto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimEmpleado"
+                    }
+                  },
+                  "Property": "salario"
+                }
+              },
+              "queryRef": "DimEmpleado.salario",
+              "nativeQueryRef": "salario"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c82c1e6f70b061b76fb0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmpleado"
+              }
+            },
+            "Property": "nombre_completo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a2033bd42542f2cba85b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmpleado"
+              }
+            },
+            "Property": "puesto"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8809f788268a5a64da3d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimEmpleado"
+              }
+            },
+            "Property": "salario"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+table ventas_diarias_por_tienda
+	lineageTag: 65ead394-41b4-4c7a-a2cd-865545455a9a
+	sourceLineageTag: [gold].[ventas_diarias_por_tienda]
+
+	column tienda_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f48a79c7-e925-4653-9801-2199389f22ae
+		sourceLineageTag: tienda_key
+		summarizeBy: none
+		sourceColumn: tienda_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 89516f95-8544-42eb-a41a-bef6edf3f2d2
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column venta_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 2)
+		lineageTag: 3ff40a5c-3a1b-4487-aff4-41a62f481ea5
+		sourceLineageTag: venta_total
+		summarizeBy: sum
+		sourceColumn: venta_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column unidades
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0b31c3ff-e180-4ecc-9588-7fbcb9e5e163
+		sourceLineageTag: unidades
+		summarizeBy: sum
+		sourceColumn: unidades
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad_transacciones
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 28c51b6b-e0e4-4490-8765-0c3e3024eab0
+		sourceLineageTag: cantidad_transacciones
+		summarizeBy: sum
+		sourceColumn: cantidad_transacciones
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ventas_diarias_por_tienda = entity
+		mode: directLake
+		source
+			entityName: ventas_diarias_por_tienda
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

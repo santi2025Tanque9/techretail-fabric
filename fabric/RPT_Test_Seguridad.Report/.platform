@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RPT_Test_Seguridad"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d644734a-2637-82af-4a4b-f81fd141341f"
+  }
+}

@@ -1,0 +1,150 @@
+table FactVentas
+	lineageTag: b91f9af8-bdde-4bf8-9858-bdb5953fb5d6
+	sourceLineageTag: [gold].[FactVentas]
+
+	column transaccion_id
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 56bccd40-23fe-4e78-ba6d-c4b226591c64
+		sourceLineageTag: transaccion_id
+		summarizeBy: none
+		sourceColumn: transaccion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9f5e230b-3e20-4107-a73d-6107b681d45d
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tienda_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7178b622-86d4-4c21-ba21-691dd9313f1f
+		sourceLineageTag: tienda_key
+		summarizeBy: none
+		sourceColumn: tienda_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column producto_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4d044d8a-6fe4-43ea-8848-87988960f759
+		sourceLineageTag: producto_key
+		summarizeBy: none
+		sourceColumn: producto_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column empleado_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a485877e-bd15-4581-8fab-83967828b282
+		sourceLineageTag: empleado_key
+		summarizeBy: none
+		sourceColumn: empleado_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 53193048-ebf3-4442-a778-a6674b4653a2
+		sourceLineageTag: cliente_key
+		summarizeBy: none
+		sourceColumn: cliente_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5a18b453-f38b-4e7a-9d74-5753b4a960d1
+		sourceLineageTag: cantidad
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_unitario
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: a2046777-3a30-4400-9d9e-4a660fcf6608
+		sourceLineageTag: precio_unitario
+		summarizeBy: sum
+		sourceColumn: precio_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column descuento_pct
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cd97da6c-ebf9-42b5-a932-fbb88ca3d6df
+		sourceLineageTag: descuento_pct
+		summarizeBy: sum
+		sourceColumn: descuento_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column venta_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 37ecb87f-402f-4c11-bb85-47aaee741ea0
+		sourceLineageTag: venta_total
+		summarizeBy: sum
+		sourceColumn: venta_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column costo_total
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: f0015104-5e6d-4c29-bdf3-db350e8d9d5b
+		sourceLineageTag: costo_total
+		summarizeBy: sum
+		sourceColumn: costo_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column requiere_revision
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: d8c86fc1-54cc-41f5-ad7e-68a5ff82767a
+		sourceLineageTag: requiere_revision
+		summarizeBy: none
+		sourceColumn: requiere_revision
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactVentas = entity
+		mode: directLake
+		source
+			entityName: FactVentas
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

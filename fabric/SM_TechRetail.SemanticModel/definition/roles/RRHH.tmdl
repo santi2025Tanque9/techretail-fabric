@@ -1,0 +1,5 @@
+role RRHH
+	modelPermission: read
+
+	annotation PBI_Id = d3c7afbf3d16483bab4645c5e65e4725
+

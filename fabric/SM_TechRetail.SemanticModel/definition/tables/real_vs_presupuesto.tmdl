@@ -1,0 +1,73 @@
+table real_vs_presupuesto
+	lineageTag: 24916365-b8f5-4a49-a62b-2488a33247a1
+	sourceLineageTag: [gold].[real_vs_presupuesto]
+
+	column tienda_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8ddfa9f5-b8c2-4a38-9424-51bc4794366e
+		sourceLineageTag: tienda_id
+		summarizeBy: none
+		sourceColumn: tienda_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_mes
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: ef2d6da5-675b-48b7-af33-06d3fac4555c
+		sourceLineageTag: anio_mes
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column venta_total_real
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(14, 2)
+		lineageTag: daaa00c5-7cd2-4adf-8900-78100d887a82
+		sourceLineageTag: venta_total_real
+		summarizeBy: sum
+		sourceColumn: venta_total_real
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column meta_venta
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 0231ec25-d199-46d1-b422-ab6fdc946434
+		sourceLineageTag: meta_venta
+		summarizeBy: sum
+		sourceColumn: meta_venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column variacion_pct
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 3f37d3c4-b237-40a8-9336-049d1da0073e
+		sourceLineageTag: variacion_pct
+		summarizeBy: sum
+		sourceColumn: variacion_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition real_vs_presupuesto = entity
+		mode: directLake
+		source
+			entityName: real_vs_presupuesto
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

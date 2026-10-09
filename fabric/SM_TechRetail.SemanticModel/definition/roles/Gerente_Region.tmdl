@@ -1,0 +1,13 @@
+role Gerente_Region
+	modelPermission: read
+
+	tablePermission DimTienda = [region] IN CALCULATETABLE(VALUES(SeguridadRegion[region]), SeguridadRegion[usuario_email] = USERPRINCIPALNAME())
+
+	tablePermission SeguridadRegion = [usuario_email] = USERPRINCIPALNAME()
+
+	tablePermission DimEmpleado
+
+		columnPermission salario = none
+
+	annotation PBI_Id = 97925dbc80054874a0ad9883dc72345a
+

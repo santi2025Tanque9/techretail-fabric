@@ -1,0 +1,9 @@
+role Direccion
+	modelPermission: read
+
+	tablePermission DimEmpleado
+
+		columnPermission salario = none
+
+	annotation PBI_Id = a80b7457a2ad4aa19fea3180e1317adb
+

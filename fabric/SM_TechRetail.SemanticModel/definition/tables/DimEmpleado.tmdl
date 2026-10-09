@@ -1,0 +1,100 @@
+table DimEmpleado
+	lineageTag: fd7327e3-8b0e-4470-9b3f-77c73cb02f9f
+	sourceLineageTag: [gold].[DimEmpleado]
+
+	column empleado_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 624f659a-60e8-48f6-9dc8-694c0dc03a21
+		sourceLineageTag: empleado_key
+		summarizeBy: none
+		sourceColumn: empleado_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column empleado_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9bc0871f-2f83-4565-af74-76c8faa7c598
+		sourceLineageTag: empleado_id
+		summarizeBy: none
+		sourceColumn: empleado_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_completo
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: ec3df777-78a4-4e56-9f49-fe2b0957172d
+		sourceLineageTag: nombre_completo
+		summarizeBy: none
+		sourceColumn: nombre_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tienda_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b8774bcf-bc22-48c9-9d6f-340220ecb62b
+		sourceLineageTag: tienda_id
+		summarizeBy: none
+		sourceColumn: tienda_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column puesto
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 2acd44b5-c180-41af-a605-fded70fc821f
+		sourceLineageTag: puesto
+		summarizeBy: none
+		sourceColumn: puesto
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_ingreso
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: a3ad4ba2-aabe-4344-a8ea-87002b825c98
+		sourceLineageTag: fecha_ingreso
+		summarizeBy: none
+		sourceColumn: fecha_ingreso
+
+		annotation SummarizationSetBy = Automatic
+
+	column salario
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: df0ffc3d-ae02-4b7b-ad6d-9f3e9eb1b581
+		sourceLineageTag: salario
+		summarizeBy: none
+		sourceColumn: salario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column documento_identidad
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: c0cbc0db-fab9-431f-a761-e138c20de5d1
+		sourceLineageTag: documento_identidad
+		summarizeBy: none
+		sourceColumn: documento_identidad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEmpleado = entity
+		mode: directLake
+		source
+			entityName: DimEmpleado
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

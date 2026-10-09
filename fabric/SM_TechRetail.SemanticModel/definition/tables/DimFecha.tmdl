@@ -1,0 +1,128 @@
+table DimFecha
+	lineageTag: 24920c3b-7a5d-45b9-b9fc-4c6100f0918a
+	sourceLineageTag: [gold].[DimFecha]
+	dataCategory: Time
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 57802662-818a-456c-8074-200e5a94ef28
+		sourceLineageTag: fecha_key
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: b0ad74f1-ba2e-4dde-b06a-399ced66fbd3
+		sourceLineageTag: fecha
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 023c8aea-1d27-4bc1-a649-ea8e33347c14
+		sourceLineageTag: anio
+		summarizeBy: sum
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bc33dd03-1e70-4f64-9995-f1de48061935
+		sourceLineageTag: mes
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 21112c78-af9f-4a78-ba91-f096b4f784cf
+		sourceLineageTag: trimestre
+		summarizeBy: sum
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_mes
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: ce9097dd-0a99-4e4f-8265-11971feb99ab
+		sourceLineageTag: nombre_mes
+		summarizeBy: none
+		sourceColumn: nombre_mes
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_mes
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 0b68e9a8-3350-41d4-a211-9c3a9acd29bf
+		sourceLineageTag: anio_mes
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia_semana
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 51f7c223-31c8-4b1a-8fb7-c0a9e263910f
+		sourceLineageTag: dia_semana
+		summarizeBy: none
+		sourceColumn: dia_semana
+		sortByColumn: dia_semana_num
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia_semana_num
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fbeec593-4d67-4f89-a64b-dca08e059516
+		sourceLineageTag: dia_semana_num
+		summarizeBy: sum
+		sourceColumn: dia_semana_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_fin_de_semana
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e98ff095-bf38-4c74-90a5-8cfc5ea59172
+		sourceLineageTag: es_fin_de_semana
+		summarizeBy: none
+		sourceColumn: es_fin_de_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimFecha = entity
+		mode: directLake
+		source
+			entityName: DimFecha
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

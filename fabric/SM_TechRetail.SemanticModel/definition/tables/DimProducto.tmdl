@@ -1,0 +1,87 @@
+table DimProducto
+	lineageTag: c421932a-dd3a-4fd1-ab7e-5ee5fb72d26a
+	sourceLineageTag: [gold].[DimProducto]
+
+	column producto_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0d6334b4-4e3b-4236-bfe6-0edc027a8bcb
+		sourceLineageTag: producto_key
+		summarizeBy: none
+		sourceColumn: producto_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: e7923575-6562-477a-87b2-b736687ba80f
+		sourceLineageTag: sku
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_producto
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 15d502f9-67b9-4503-bca2-d352e71d5de0
+		sourceLineageTag: nombre_producto
+		summarizeBy: none
+		sourceColumn: nombre_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: a495b1b8-e3b5-4950-b76b-4a4695b592e8
+		sourceLineageTag: categoria
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategoria
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 79759574-720d-4ab0-aa42-cf651bce066a
+		sourceLineageTag: subcategoria
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column marca
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 4f71ba50-efef-4f6a-bdf4-8dc72dffaada
+		sourceLineageTag: marca
+		summarizeBy: none
+		sourceColumn: marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column costo_unitario
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 2c29c277-e998-45ed-b574-290345594240
+		sourceLineageTag: costo_unitario
+		summarizeBy: none
+		sourceColumn: costo_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition DimProducto = entity
+		mode: directLake
+		source
+			entityName: DimProducto
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

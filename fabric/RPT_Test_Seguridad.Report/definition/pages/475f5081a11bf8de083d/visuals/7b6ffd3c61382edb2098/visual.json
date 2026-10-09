@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "7b6ffd3c61382edb2098",
+  "position": {
+    "x": 125.79852579852579,
+    "y": 127.37100737100737,
+    "z": 0,
+    "height": 735.9213759213759,
+    "width": 684.029484029484,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTienda"
+                    }
+                  },
+                  "Property": "region"
+                }
+              },
+              "queryRef": "DimTienda.region",
+              "nativeQueryRef": "region"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Venta Total"
+                }
+              },
+              "queryRef": "Medidas.Venta Total",
+              "nativeQueryRef": "Venta Total"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d114a5edb8fde7b32440",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimTienda"
+              }
+            },
+            "Property": "region"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cddb635f2c245e9bb972",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Medidas"
+              }
+            },
+            "Property": "Venta Total"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

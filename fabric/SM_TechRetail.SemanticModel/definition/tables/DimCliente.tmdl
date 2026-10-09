@@ -1,0 +1,76 @@
+table DimCliente
+	lineageTag: 4ace84f6-7c08-495b-a6da-c046ff75a941
+	sourceLineageTag: [gold].[DimCliente]
+
+	column cliente_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 34699b43-41f4-4274-a8d8-0b1307ca4a79
+		sourceLineageTag: cliente_key
+		summarizeBy: none
+		sourceColumn: cliente_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f9f3c89a-bd20-483f-9081-3af9f7729fcf
+		sourceLineageTag: cliente_id
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_completo
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: a43a89f0-131e-4a3a-b939-ea475247e44b
+		sourceLineageTag: nombre_completo
+		summarizeBy: none
+		sourceColumn: nombre_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_registro
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 22562600-023c-4f4d-8ea2-b5b2fc0b9559
+		sourceLineageTag: fecha_registro
+		summarizeBy: none
+		sourceColumn: fecha_registro
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier_lealtad
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 73098884-e41b-4ec6-b2e6-7eef4157e2b1
+		sourceLineageTag: tier_lealtad
+		summarizeBy: none
+		sourceColumn: tier_lealtad
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad
+		dataType: string
+		sourceProviderType: varchar(-1)
+		lineageTag: 15b91dc9-c953-41b6-9418-4f5704730b64
+		sourceLineageTag: ciudad
+		summarizeBy: none
+		sourceColumn: ciudad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCliente = entity
+		mode: directLake
+		source
+			entityName: DimCliente
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,118 @@
+table Medidas
+	lineageTag: fe344b5d-ef71-400d-ab94-e474b379ba1d
+
+	measure 'Venta Total' = SUM ( FactVentas[venta_total] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: fa032bfd-6a45-4257-8464-92b3de585fb5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Costo Total' = SUM ( FactVentas[costo_total] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3164e8a7-5f99-4d33-b77d-c7cef0fbb782
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Margen Bruto' = [Venta Total] - [Costo Total]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 966bb6a1-e4e3-4b62-9ea7-5a821a9ebfb5
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Margen %' = DIVIDE ( [Margen Bruto], [Venta Total] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 79e09767-5dc5-4aa7-9963-fbeb089ab0f8
+
+	measure 'Unidades Vendidas' = SUM ( FactVentas[cantidad] )
+		formatString: #,0
+		lineageTag: 09acb6e4-cf81-4dfc-a8e7-c919461a13e2
+
+	measure Transacciones = COUNTROWS ( FactVentas )
+		formatString: #,0
+		lineageTag: 26e3962d-3e32-4b55-8ae5-1fa37d48d8d7
+
+	measure 'Ticket Promedio' = DIVIDE ( [Venta Total], [Transacciones] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 21343885-f723-49b1-9d00-26f5b0cd648b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Ventas Descuento Atípico' =
+			
+			CALCULATE ( [Transacciones], FactVentas[descuento_pct] >= 50 )
+		formatString: #,0
+		lineageTag: e69cf64b-49a8-484e-9c20-38f6696e304d
+
+	measure '% Ventas Sin Cliente' =
+			
+			DIVIDE (
+			    CALCULATE ( [Transacciones], FactVentas[cliente_key] = -1 ),
+			    [Transacciones]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 0955782b-31cd-4740-8936-fd243fe947a0
+
+	measure 'Venta Real Mensual' = SUM ( real_vs_presupuesto[venta_total_real] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 0ee9807f-8b7c-420f-a801-df683d37c4fe
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Meta Venta' = SUM ( real_vs_presupuesto[meta_venta] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 42aff2cd-11cd-446d-bdff-44d210e8512a
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Cumplimiento %' = DIVIDE ( [Venta Real Mensual], [Meta Venta] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a1ad1155-d310-4db0-a2ed-0bfa1299b9cb
+
+	measure 'Variación %' = DIVIDE ( [Venta Real Mensual] - [Meta Venta], [Meta Venta] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: d421f63a-ba75-4659-bcea-fb72401caad8
+
+	measure 'Meses con Meta Cumplida' =
+			
+			COUNTROWS (
+			    FILTER (
+			        real_vs_presupuesto,
+			        real_vs_presupuesto[venta_total_real] >= real_vs_presupuesto[meta_venta]
+			    )
+			)
+		formatString: #,0
+		lineageTag: f11a2f63-3a48-4a11-9af5-e6842d69e0f1
+
+	measure 'Stock Cierre' =
+			
+			VAR UltimoMes = MAX ( FactInventario[fecha_key] )
+			RETURN
+			    CALCULATE (
+			        SUM ( FactInventario[cantidad_disponible] ),
+			        FactInventario[fecha_key] = UltimoMes
+			    )
+		formatString: #,0
+		lineageTag: 76e3f86f-a831-43b1-9077-dbfc263ed173
+
+	measure 'Quiebres de Stock' =
+			
+			CALCULATE ( COUNTROWS ( FactInventario ), FactInventario[sin_stock] = TRUE () )
+		formatString: #,0
+		lineageTag: e48ea485-71d8-4807-9c65-36cfb0609a2d
+
+	column x
+		isHidden
+		formatString: 0
+		lineageTag: 5fe71f94-91d0-40df-bc45-6ece584c8a28
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [x]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = calculated
+		mode: import
+		source = ROW ( "x", BLANK () )
+
+	annotation PBI_Id = 17a88219766d458bb32206297ba3d01a
+

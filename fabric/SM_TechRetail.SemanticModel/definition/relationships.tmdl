@@ -1,0 +1,40 @@
+relationship 276e8110-6d5e-3df4-fbff-baac8488e7c1
+	fromColumn: FactVentas.cliente_key
+	toColumn: DimCliente.cliente_key
+
+relationship cd92bc43-12e3-8fc3-da79-593b5b3f777e
+	fromColumn: FactVentas.empleado_key
+	toColumn: DimEmpleado.empleado_key
+
+relationship 7521ac0f-ef73-0ece-37d0-c655e1677620
+	fromColumn: FactVentas.fecha_key
+	toColumn: DimFecha.fecha_key
+
+relationship c263f7b1-0b1f-2c4f-c7a9-9e9efc0e2333
+	fromColumn: FactVentas.producto_key
+	toColumn: DimProducto.producto_key
+
+relationship c906efb8-d64c-eb51-fe90-a431d90b8a90
+	fromColumn: FactVentas.tienda_key
+	toColumn: DimTienda.tienda_key
+
+relationship 134bf0b3-ecb0-bebf-c02c-604e044f27d6
+	fromColumn: real_vs_presupuesto.tienda_id
+	toColumn: DimTienda.tienda_id
+
+relationship a423b454-2b17-3907-8bf5-92ac9bf61592
+	fromColumn: FactInventario.tienda_key
+	toColumn: DimTienda.tienda_key
+
+relationship 7410306c-0cdc-b658-d129-04921879d2f5
+	fromColumn: FactInventario.fecha_key
+	toColumn: DimFecha.fecha_key
+
+relationship bb4d29cb-2641-9aab-ac53-cb5e3edb7cfa
+	fromColumn: ventas_diarias_por_tienda.tienda_key
+	toColumn: DimTienda.tienda_key
+
+relationship c675351d-7fa0-4382-76b6-045200806c6d
+	fromColumn: ventas_diarias_por_tienda.fecha_key
+	toColumn: DimFecha.fecha_key
+

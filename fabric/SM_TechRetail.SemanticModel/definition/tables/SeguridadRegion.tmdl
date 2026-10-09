@@ -1,0 +1,42 @@
+table SeguridadRegion
+	isHidden
+	lineageTag: 92ceb145-0ab8-4ea5-b6c9-568890ef5c1f
+	sourceLineageTag: [gold].[SeguridadRegion]
+
+	column usuario_email
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(200)
+		lineageTag: 8025ee46-2ca8-4fa9-b704-3f1e476d7055
+		sourceLineageTag: usuario_email
+		summarizeBy: none
+		sourceColumn: usuario_email
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(50)
+		lineageTag: aa0d6a68-b380-4e11-a488-5d89317e6ff8
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SeguridadRegion = entity
+		mode: directLake
+		source
+			entityName: SeguridadRegion
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

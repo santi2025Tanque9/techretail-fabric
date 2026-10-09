@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit","DaxQueryView_Desktop","TMDLView_Desktop"]
+
+ref table DimFecha
+ref table DimTienda
+ref table DimProducto
+ref table DimEmpleado
+ref table DimCliente
+ref table FactVentas
+ref table real_vs_presupuesto
+ref table ventas_diarias_por_tienda
+ref table FactInventario
+ref table Medidas
+ref table SeguridadRegion
+
+ref role Gerente_Region
+ref role Direccion
+ref role RRHH
+
