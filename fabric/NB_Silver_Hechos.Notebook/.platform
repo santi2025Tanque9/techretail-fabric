@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "NB_Silver_Hechos"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fabf9bb1-36cf-858a-4316-6a4552cdfa3e"
+  }
+}
