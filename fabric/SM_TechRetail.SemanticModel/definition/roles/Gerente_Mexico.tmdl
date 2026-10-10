@@ -1,0 +1,13 @@
+role Gerente_Mexico
+	modelPermission: read
+
+	tablePermission DimTienda = [region] == "México"
+
+	tablePermission SeguridadRegion = FALSE()
+
+	tablePermission DimEmpleado
+
+		columnPermission salario = none
+
+	annotation PBI_Id = 059b17502dfa4cadb02c9d29b514580f
+

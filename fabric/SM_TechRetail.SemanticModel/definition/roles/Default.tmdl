@@ -1,0 +1,11 @@
+role Default
+	modelPermission: read
+
+	tablePermission SeguridadRegion = FALSE()
+
+	tablePermission DimEmpleado
+
+		columnPermission salario = none
+
+	annotation PBI_Id = 429152e24502424cb8c752dcff1388af
+

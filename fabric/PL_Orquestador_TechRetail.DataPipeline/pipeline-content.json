@@ -152,6 +152,49 @@
             ]
           }
         ]
+      },
+      {
+        "type": "Script",
+        "typeProperties": {
+          "scripts": [
+            {
+              "text": {
+                "value": "     ALTER TABLE gold.DimEmpleado\n     ALTER COLUMN documento_identidad\n     ADD MASKED WITH (FUNCTION = 'partial(2, \"XXXX\", 2)');",
+                "type": "Expression"
+              },
+              "type": "NonQuery"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        },
+        "linkedService": {
+          "name": "WarehouseGold",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "12d3b649-6124-a69e-45e7-ce946b2cbd64",
+              "endpoint": "ucojbqybhi5etddmqu4zmyg6by-tgcfggajt4murced4mqlom5rta.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "00000000-0000-0000-0000-000000000000"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Aplicar_DDM_Gold",
+        "dependsOn": [
+          {
+            "activity": "Gold_Hechos",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ]
   }

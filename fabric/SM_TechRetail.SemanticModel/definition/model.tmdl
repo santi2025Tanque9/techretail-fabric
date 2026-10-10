@@ -26,6 +26,11 @@ ref table Medidas
 ref table SeguridadRegion
 
 ref role Gerente_Region
-ref role Direccion
 ref role RRHH
+ref role Default
+ref role Gerente_Argentina
+ref role Gerente_Chile
+ref role Gerente_Colombia
+ref role Gerente_Mexico
+ref role Gerente_Peru
 
