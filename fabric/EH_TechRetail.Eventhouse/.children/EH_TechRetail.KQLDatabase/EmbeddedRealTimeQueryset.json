@@ -1,0 +1,46 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb",
+        "clusterUri": "https://trd-9nv223hx18t5p459de.z0.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "fa093d25-5967-4c2e-9584-e8b7bff6fde1"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "b2607e46-a818-4dd6-8cce-8b133fde95f4",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nYOUR_TABLE_HERE\n| take 100\n\n// See how many records are in the table.\nYOUR_TABLE_HERE\n| count\n\n// This query returns the number of ingestions per hour in the given table.\nYOUR_TABLE_HERE\n| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
+      },
+      {
+        "id": "b78c141f-da5e-49ee-bb99-a9c6e625474c",
+        "content": "// Resumen del flujo en tiempo real con las reglas de negocio de Silver\nventas_tiempo_real\n| extend ts = todatetime(timestamp_evento)\n| extend venta_total = round(cantidad * precio_unitario * (1 - descuento_pct / 100.0), 2),\n         es_anomalia = descuento_pct >= 50\n| summarize eventos = count(),\n            anomalias = countif(es_anomalia),\n            pct_anomalias = round(100.0 * countif(es_anomalia) / count(), 2),\n            venta_total = round(sum(venta_total), 2),\n            primer_evento = min(ts),\n            ultimo_evento = max(ts)",
+        "title": "resumen general",
+        "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
+      },
+      {
+        "id": "12218987-3d74-4155-8823-8f2d08d6aac0",
+        "content": "// Ventas con descuento >= 50% en las últimas 24 horas, de la más reciente a la más antigua\nventas_tiempo_real\n| extend ts = todatetime(timestamp_evento)\n| where descuento_pct >= 50\n| where ts > ago(24h)\n| extend venta_total = round(cantidad * precio_unitario * (1 - descuento_pct / 100.0), 2)\n| project ts, tienda_id, empleado_id, sku, cantidad, precio_unitario, descuento_pct, venta_total\n| order by ts desc",
+        "title": "alertas",
+        "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
+      },
+      {
+        "id": "890994e5-7746-4927-887c-4f4d5956156f",
+        "content": "// Ranking de tiendas con más descuentos anómalos\nventas_tiempo_real\n| where descuento_pct >= 50\n| summarize anomalias = count() by tienda = strcat(\"Tienda \", tostring(tienda_id))\n| order by anomalias desc\n| render columnchart",
+        "title": "anomalías por tienda",
+        "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
+      },
+      {
+        "id": "cb3bcfa4-385b-4697-991a-822d13a57056",
+        "content": "// Volumen de ventas por minuto: muestra el flujo continuo del streaming\nventas_tiempo_real\n| extend ts = todatetime(timestamp_evento)\n| summarize ventas = count(), anomalias = countif(descuento_pct >= 50) by bin(ts, 1m)\n| order by ts asc\n| render timechart",
+        "title": "ventas por minuto (monitoreo del flujo)",
+        "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
+      }
+    ],
+    "querysetType": "Embedded"
+  }
+}

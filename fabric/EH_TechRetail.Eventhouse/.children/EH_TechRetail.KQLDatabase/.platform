@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDatabase",
+    "displayName": "EH_TechRetail"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bff6fde1-e8b7-9584-4c2e-5967fa093d25"
+  }
+}

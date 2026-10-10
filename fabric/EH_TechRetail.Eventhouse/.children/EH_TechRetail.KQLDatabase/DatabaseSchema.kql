@@ -1,0 +1,5 @@
+// KQL script
+// Use management commands in this script to configure your database items, such as tables, functions, materialized views, and more.
+
+
+.create-merge table ventas_tiempo_real (evento_id:string, timestamp_evento:string, tienda_id:long, empleado_id:long, sku:string, cantidad:long, precio_unitario:real, descuento_pct:long) 

@@ -1,0 +1,186 @@
+{
+  "sources": [
+    {
+      "id": "8e929153-22d6-41aa-bf41-c9b79c7c459a",
+      "name": "src_generador_pos",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [
+    {
+      "id": "6859262f-2267-4206-b85a-95d64dc7541c",
+      "name": "dst_kql_ventas",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "bff6fde1-e8b7-9584-4c2e-5967fa093d25",
+        "databaseName": "EH_TechRetail",
+        "tableName": "ventas_tiempo_real",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "ES_Ventas_TiempoReal-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "ES_Ventas_TiempoReal-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "evento_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "timestamp_evento",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "tienda_id",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "empleado_id",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "sku",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "cantidad",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "precio_unitario",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "descuento_pct",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "be2ac481-6bdc-4a28-ba0b-b3d58a209c68",
+      "name": "dst_bronze_ventas",
+      "type": "Lakehouse",
+      "properties": {
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "56cd5073-a6e5-8f63-42c8-d84510ef4bc0",
+        "schema": "bronze",
+        "deltaTable": "ventas_tiempo_real",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "ES_Ventas_TiempoReal-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "ES_Ventas_TiempoReal-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "evento_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "timestamp_evento",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "tienda_id",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "empleado_id",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "sku",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "cantidad",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "precio_unitario",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "descuento_pct",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "259365b3-f484-4b45-a603-26d574247c05",
+      "name": "ES_Ventas_TiempoReal-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "src_generador_pos"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}
