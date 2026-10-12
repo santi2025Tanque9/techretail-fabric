@@ -31,7 +31,7 @@
                     }
                   ],
                   "storeSettings": {
-                    "type": "LakehouseReadSettings",
+                    "type": "AzureBlobStorageReadSettings",
                     "recursive": true,
                     "enablePartitionDiscovery": false
                   },

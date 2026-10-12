@@ -364,15 +364,3 @@ df_tienda_raw.printSchema()
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
-
-# MARKDOWN ********************
-
-# ## 3. `bronze.empleados`
-# 
-# *Pendiente.*
-
-# MARKDOWN ********************
-
-# ## 4. `bronze.clientes`
-# 
-# *Pendiente.*
