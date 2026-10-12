@@ -1,0 +1,6 @@
+# Secretos: nunca versionar
+.env
+
+# Entorno virtual
+.venv/
+__pycache__/
