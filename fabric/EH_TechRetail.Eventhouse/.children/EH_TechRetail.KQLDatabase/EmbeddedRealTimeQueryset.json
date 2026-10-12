@@ -24,7 +24,7 @@
       },
       {
         "id": "12218987-3d74-4155-8823-8f2d08d6aac0",
-        "content": "// Ventas con descuento >= 50% en las últimas 24 horas, de la más reciente a la más antigua\nventas_tiempo_real\n| extend ts = todatetime(timestamp_evento)\n| where descuento_pct >= 50\n| where ts > ago(24h)\n| extend venta_total = round(cantidad * precio_unitario * (1 - descuento_pct / 100.0), 2)\n| project ts, tienda_id, empleado_id, sku, cantidad, precio_unitario, descuento_pct, venta_total\n| order by ts desc",
+        "content": "// Ventas con descuento >= 50% en las últimas 24 horas, de la más reciente a la más antigua\nventas_tiempo_real\n| extend ts = todatetime(timestamp_evento)\n| where descuento_pct >= 50\n| where ts > ago(7d)\n| extend venta_total = round(cantidad * precio_unitario * (1 - descuento_pct / 100.0), 2)\n| project ts, tienda_id, empleado_id, sku, cantidad, precio_unitario, descuento_pct, venta_total\n| order by ts desc",
         "title": "alertas",
         "dataSourceId": "c13d7a7e-5b7b-4e8f-a2dd-9b7bfdba97bb"
       },
