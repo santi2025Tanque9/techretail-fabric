@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "b03b65a342970a4b7703",
+  "position": {
+    "x": 20.566182096403978,
+    "y": 301.14766641162964,
+    "z": 0,
+    "height": 690.43611323641926,
+    "width": 890.221882172915,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactInventario"
+                    }
+                  },
+                  "Property": "categoria"
+                }
+              },
+              "queryRef": "FactInventario.categoria",
+              "nativeQueryRef": "categoria",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTienda"
+                    }
+                  },
+                  "Property": "nombre_tienda_display"
+                }
+              },
+              "queryRef": "DimTienda.nombre_tienda_display",
+              "nativeQueryRef": "nombre_tienda_display",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Stock Cierre"
+                }
+              },
+              "queryRef": "Medidas.Stock Cierre",
+              "nativeQueryRef": "Stock Cierre"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
